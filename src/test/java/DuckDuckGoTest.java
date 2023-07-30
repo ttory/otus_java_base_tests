@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import web.pages.DuckDuckGo;
-import web.pages.Otus;
 import web.utils.Constants;
 
 import static org.junit.jupiter.api.Assertions.fail;
