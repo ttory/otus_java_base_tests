@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PhotoFlashTest {
     private static final By PICTURES_LIST = By.xpath("//li[contains(@class, 'portfolio-item2 content')]");
-    private static final By MODAL_PICTURE = By.xpath("//div[contains(@class, 'pp_pic_holder')]");
+    private static final By OVERLAY = By.cssSelector(".pp_overlay");
     private WebDriver driver;
 
     @BeforeAll
@@ -31,13 +31,15 @@ public class PhotoFlashTest {
     }
 
     @Test
-    public void openPicture() {
-
+    public void openPictureTest() {
         List<WebElement> pictureList = driver.findElements(PICTURES_LIST);
         int size = pictureList.size();
-        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions
-                .elementToBeClickable(pictureList.get((int) Math.round(Math.random() * (size - 1)))));
-        driver.findElements(MODAL_PICTURE);
+        WebElement pic = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
+                .visibilityOf(pictureList.get((int) Math.round(Math.random() * (size - 1)))));
+        pic.click();
+        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions
+                .presenceOfElementLocated(OVERLAY));
+        Assertions.assertTrue(driver.findElement(OVERLAY).isDisplayed());
     }
 
     @AfterEach

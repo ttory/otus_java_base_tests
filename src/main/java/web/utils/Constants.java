@@ -9,6 +9,7 @@ public class Constants {
             + "index.html?_ga=2.181802926.889871791.1632394818-2083132868.1632394818";
     public static final String OTUS_LOGIN = "yokona2965@mahmul.com";
     public static final String OTUS_PASS = "!1Test--";
+    public static final String OTUS_USER_NAME = "TECT";
 
 
 }

@@ -7,12 +7,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import web.pages.DuckDuckGo;
 import web.utils.Constants;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DuckDuckGoTest {
 
     private static final By FIRST_RESULT = By.xpath("//div//li[1]//article[@id='r1-0']" +
-            "//span[starts-with(text(), 'Онлайн‑курсы для профессионалов, дистанционное обучение')]");
+            "/div[2]//span");
     private WebDriver driver;
 
     @BeforeAll
@@ -31,12 +32,14 @@ public class DuckDuckGoTest {
 
     @Test
     public void searchTest() {
+         String text = "Онлайн‑курсы для профессионалов, дистанционное обучение";
         try {
             new DuckDuckGo(driver).searchIn("ОТУС");
         } catch (Exception e) {
             fail(e.getMessage());
         }
-        driver.findElement(FIRST_RESULT);
+        String realText = driver.findElement(FIRST_RESULT).getText();
+        assertTrue(realText.startsWith(text));
     }
 
     @AfterEach
